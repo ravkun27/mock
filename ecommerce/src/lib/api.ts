@@ -56,3 +56,19 @@ export async function fetchSmartphones(): Promise<Product[]> {
     return [];
   }
 }
+
+export const fetchProductById = async (
+  id: string | number
+): Promise<Product> => {
+  try {
+    const response = await fetch(`https://dummyjson.com/products/${id}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch product with ID ${id}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(`Error fetching product with ID ${id}:`, error);
+    throw error;
+  }
+};

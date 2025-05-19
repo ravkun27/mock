@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage";
 import CheckoutPage from "./pages/CheckoutPage";
 import { useEffect, useState } from "react";
 import { fetchSmartphones } from "./lib/api";
+import ProductPage from "./pages/ProductPage";
 
 const App = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -38,6 +39,10 @@ const App = () => {
             handleAddToCart={handleAddToCart}
           />
         }
+      />
+      <Route
+        path="/product/:id"
+        element={<ProductPage handleAddToCart={handleAddToCart} />}
       />
       <Route path="/checkout" element={<CheckoutPage />} />
     </Routes>

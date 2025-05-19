@@ -11,23 +11,26 @@ import {
   ChevronUp,
 } from "lucide-react";
 import { Button } from "./ui/Button";
+import { useNavigate } from "react-router-dom";
 
 // Product Details Component
-const ProductDetails = ({ product }: { product: any }) => {
+const ProductDetails = ({
+  product,
+  handleAddToCart,
+}: {
+  product: any;
+  handleAddToCart: any;
+}) => {
   const [quantity, setQuantity] = useState(product.minimumOrderQuantity);
   const [isWishlist, setIsWishlist] = useState(false);
   const [selectedImage, setSelectedImage] = useState(0);
   const [activeTab, setActiveTab] = useState("description");
   const [showReviews, setShowReviews] = useState(false);
+  const navigate = useNavigate();
 
   // Calculate the discounted price
   const discountedPrice =
     product.price - product.price * (product.discountPercentage / 100);
-
-  const handleAddToCart = () => {
-    console.log(`Added ${quantity} ${product.title} to cart`);
-    // Implement your add to cart logic here
-  };
 
   const handleQuantityChange = (change: number) => {
     const newQuantity = quantity + change;
@@ -62,7 +65,12 @@ const ProductDetails = ({ product }: { product: any }) => {
     <div className="max-w-6xl mx-auto px-4 py-8">
       {/* Breadcrumb */}
       <div className="mb-6">
-        <Button variant="outline" size="sm" className="flex items-center">
+        <Button
+          variant="outline"
+          size="sm"
+          className="flex items-center"
+          onClick={() => navigate("/")}
+        >
           <ArrowLeft size={16} className="mr-1" />
           Back to Products
         </Button>

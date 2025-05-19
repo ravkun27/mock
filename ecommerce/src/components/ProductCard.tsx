@@ -1,8 +1,9 @@
 import { Heart } from "lucide-react";
 import { Button } from "./ui/Button";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-// Product Card Component
+// Updated Product Card Component with navigation
 export const ProductCard = ({
   id,
   name,
@@ -13,13 +14,21 @@ export const ProductCard = ({
   onAddToCart,
 }: any) => {
   const [isWishlist, setIsWishlist] = useState(false);
+  const navigate = useNavigate();
+
+  const handleProductClick = () => {
+    navigate(`/product/${id}`, { state: { productId: id } });
+  };
 
   return (
     <div className="flex flex-col bg-white rounded-lg shadow-md overflow-hidden">
-      <div className="relative">
+      <div className="relative cursor-pointer" onClick={handleProductClick}>
         <img src={thumbnail} alt={name} className="w-full h-64 object-cover" />
         <button
-          onClick={() => setIsWishlist(!isWishlist)}
+          onClick={(e) => {
+            e.stopPropagation(); // Prevent triggering product click
+            setIsWishlist(!isWishlist);
+          }}
           className="absolute top-2 right-2 bg-white p-2 rounded-full shadow"
           aria-label="Toggle wishlist"
         >
@@ -36,10 +45,11 @@ export const ProductCard = ({
           </span>
         )}
       </div>
-
-      <div className="p-4 flex flex-col flex-grow">
+      <div
+        className="p-4 flex flex-col flex-grow cursor-pointer"
+        onClick={handleProductClick}
+      >
         <h3 className="font-medium text-gray-900 mb-1">{name}</h3>
-
         {rating !== undefined && (
           <div className="flex items-center mb-2">
             {[...Array(5)].map((_, i) => (
@@ -55,10 +65,16 @@ export const ProductCard = ({
             <span className="text-xs text-gray-500 ml-1">({rating})</span>
           </div>
         )}
-
         <div className="mt-auto pt-2 flex items-center justify-between">
           <span className="font-bold text-gray-900">${price.toFixed(2)}</span>
-          <Button variant="default" size="sm" onClick={() => onAddToCart?.(id)}>
+          <Button
+            variant="default"
+            size="sm"
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent triggering product click
+              onAddToCart?.(id);
+            }}
+          >
             Add to Cart
           </Button>
         </div>
