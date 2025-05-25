@@ -11,6 +11,7 @@ export const HeroSection = ({ products }: HeroSectionProps) => {
   const [current, setCurrent] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
   const autoSlideInterval = 5000;
+  console.log(products);
 
   useEffect(() => {
     const timer = setInterval(() => {

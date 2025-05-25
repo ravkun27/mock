@@ -1,4 +1,5 @@
 // src/lib/api.ts
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 interface ProductDimensions {
   width: number;
   height: number;
@@ -44,18 +45,27 @@ export type Product = {
   thumbnail?: string;
 };
 
-export async function fetchSmartphones(): Promise<Product[]> {
+export const fetchProducts = async (): Promise<any> => {
   try {
-    const res = await fetch(
-      "https://dummyjson.com/products/category/smartphones"
-    );
-    const data = await res.json();
-    return data.products;
+    const response = await fetch(`${API_BASE_URL}/api/products`);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (data.success && Array.isArray(data.products)) {
+      return data.products as any;
+    } else {
+      throw new Error("Unexpected response structure");
+    }
   } catch (error) {
-    console.error("Failed to fetch smartphones:", error);
-    return [];
+    console.error("Failed to fetch products:", error);
+    return []; // fallback: return an empty array
   }
-}
+};
+
 
 export const fetchProductById = async (
   id: string | number
