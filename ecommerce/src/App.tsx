@@ -5,7 +5,7 @@ import ProductPage from "./pages/ProductPage";
 import LoginPage from "./pages/LoginPage";
 import AdminPanel from "./pages/AdminPanel";
 import { useEffect, useState } from "react";
-import SignupPage from "./pages/SignUpPage";
+import SignupPage from "./pages/SignupPage";
 import { fetchProducts } from "././lib/api"; // adjust path as needed
 
 interface User {
