@@ -5,6 +5,11 @@ import { useState } from "react";
 export const Navbar = ({ cartCount = 0 }: any) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    window.location.href = "/login";
+  };
   return (
     <nav className="bg-[#111518] shadow-sm relative top-0 z-10">
       <div className="max-w-7xl mx-auto px-4">
@@ -60,6 +65,7 @@ export const Navbar = ({ cartCount = 0 }: any) => {
                   </span>
                 )}
               </a>
+              <button className="bg-white px-4 py-2 cursor-pointer rounded-md text-red-500" onClick={handleLogout}>Logout</button>
             </div>
 
             <div className="flex md:hidden">
