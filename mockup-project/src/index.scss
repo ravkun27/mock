@@ -1,0 +1,7 @@
+// index.scss or App.scss
+@use "carbon-components/scss/globals/scss/styles.scss";
+// Bring in all the styles for Carbon in your root/global stylesheet
+@use "@carbon/react";
+
+// Or bring in the styles for one component
+@use "@carbon/react/scss/components/button";

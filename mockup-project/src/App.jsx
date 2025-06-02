@@ -1,16 +1,13 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-import "./index.css";
-import HomePage from "./pages/HomePage";
+import "./App.scss";
+import "./index.scss";
+import LandingPage from "./pages/LandingPage";
+import { Button } from "carbon-components-react";
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <>
-      <HomePage />
+      <LandingPage />
     </>
   );
 }
